@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://entities/enviroment/box.tres" type="Material" id=1]
+[ext_resource path="res://entities/car_1/vehicle.gd" type="Script" id=2]
+[ext_resource path="res://entities/car_1/suspension.gd" type="Script" id=3]
+
+
+
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[node name="RigidBody2" type="RigidBody"]
+mass = 153.061
+continuous_cd = true
+can_sleep = false
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource( 2 )
+
+[node name="TurnPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235438, -0.26789, -0.319722 )
+
+[node name="PushPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030413, -0.0199715, 0.511541 )
+
+[node name="WheelRayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.622165, 0.5 )
+enabled = true
+script = ExtResource( 3 )
+
+[node name="Wheel" type="CSGCylinder" parent="WheelRayCast"]
+transform = Transform( -4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0.00413728, -0.988489, 0.0388849 )
+radius = 0.2
+height = 0.0736765
+sides = 16
+
+[node name="WheelRayCast2" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.622165, -0.5 )
+enabled = true
+script = ExtResource( 3 )
+
+[node name="Wheel" type="CSGCylinder" parent="WheelRayCast2"]
+transform = Transform( -4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, -0.991274, -0.988489, 1.03888 )
+radius = 0.2
+height = 0.0736765
+sides = 16
+
+[node name="WheelRayCast3" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.622165, 0.5 )
+enabled = true
+script = ExtResource( 3 )
+
+[node name="Wheel" type="CSGCylinder" parent="WheelRayCast3"]
+transform = Transform( -4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 1.00862, -0.988488, -1.04081 )
+radius = 0.2
+height = 0.0736765
+sides = 16
+
+[node name="WheelRayCast4" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.622165, -0.5 )
+enabled = true
+script = ExtResource( 3 )
+
+[node name="Wheel" type="CSGCylinder" parent="WheelRayCast4"]
+transform = Transform( -4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0.013211, -0.988488, -0.040807 )
+radius = 0.2
+height = 0.0736765
+sides = 16
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Box" type="CSGBox" parent="CollisionShape"]
+width = 1.0
+height = 1.0
+depth = 1.0
+material = ExtResource( 1 )

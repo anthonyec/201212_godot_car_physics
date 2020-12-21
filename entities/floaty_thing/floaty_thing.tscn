@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/floaty_thing/force_test.gd" type="Script" id=1]
+[ext_resource path="res://entities/enviroment/box.tres" type="Material" id=2]
+
+
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.905914, 0.793368, 1.9965 )
+
+[node name="CarRigidBody" type="RigidBody"]
+gravity_scale = 0.0
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Car" type="CSGBox" parent="."]
+width = 1.8
+height = 1.5
+depth = 4.0
+material = ExtResource( 2 )
+
+[node name="PushPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96046e-08, 0, 2.01651 )
+
+[node name="LeftPosition" type="Position3D" parent="."]
+transform = Transform( 0.999749, 0.0224082, 0, -0.0223999, 0.999379, -0.0272063, -0.000609644, 0.0271995, 0.99963, -0.914, 0, -0.7 )
+
+[node name="RightPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.931601, 0, -0.7 )
