@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="CSGCylinder" type="CSGCylinder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+radius = 0.1
+height = 6.0
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0, 2.9, -0.8 )
+light_color = Color( 1, 0.921569, 0.854902, 1 )
+shadow_enabled = true
+spot_range = 11.8
+spot_angle = 49.0432

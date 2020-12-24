@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/follow_cam/follow_cam.gd" type="Script" id=1]
+
+[node name="FollowCamera" type="Camera"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 15.1, 0 )
+projection = 1
+size = 21.6
+script = ExtResource( 1 )

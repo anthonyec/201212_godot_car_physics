@@ -1,14 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/camera/orbit_cam.gd" type="Script" id=1]
 [ext_resource path="res://entities/position/position.gd" type="Script" id=2]
 [ext_resource path="res://entities/enviroment/grid.tres" type="Material" id=3]
+[ext_resource path="res://entities/follow_cam/follow_cam.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/simple_car/simple_car.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/lamppost/lamppost.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
 background_color = Color( 0.364706, 0.643137, 0.729412, 1 )
 ambient_light_color = Color( 0.00392157, 0.129412, 0.266667, 1 )
+ambient_light_energy = 2.0
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 3.54386, 0, 0, Vector2( 0.891089, 1 ), 0.0, 0.0, 0, 0 ]
@@ -23,9 +26,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0135001, -2.38419e-07, -0.00
 visible = false
 script = ExtResource( 2 )
 
-[node name="MainCamera" type="Camera" parent="."]
+[node name="FollowCamera" parent="." instance=ExtResource( 4 )]
+visible = false
+projection = 0
+current = true
+target = NodePath("../SimpleCar")
+height = 15.0
+
+[node name="DebugCamera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 15.1, 3.3 )
-projection = 1
 size = 26.5
 script = ExtResource( 1 )
 target_path = NodePath("../SimpleCar")
@@ -34,17 +43,27 @@ target_path = NodePath("../SimpleCar")
 transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3, 0 )
 light_color = Color( 0.956863, 0.956863, 0.945098, 1 )
 shadow_enabled = true
-shadow_color = Color( 0.145098, 0.145098, 0.145098, 1 )
+shadow_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
 [node name="Floor" type="CSGBox" parent="."]
 use_collision = true
-width = 100.0
+width = 200.0
 height = 0.002
-depth = 100.0
+depth = 200.0
 material = ExtResource( 3 )
 
 [node name="SimpleCar" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
+turn_curve = SubResource( 2 )
+
+[node name="SimpleCar2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -8.5 )
+disable_controls = true
+turn_curve = SubResource( 2 )
+
+[node name="SimpleCar3" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -16.2 )
+disable_controls = true
 turn_curve = SubResource( 2 )
 
 [node name="CSGBox3" type="CSGBox" parent="."]
@@ -62,3 +81,124 @@ depth = 4.2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9, 1.2, 5.7 )
 use_collision = true
 width = 20.2
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9, 1.2, -20.4 )
+use_collision = true
+width = 7.2
+depth = 9.8
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.2, -20.4 )
+use_collision = true
+width = 7.2
+depth = 9.8
+
+[node name="CSGBox7" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.2, -38.7 )
+use_collision = true
+width = 7.2
+depth = 9.8
+
+[node name="CSGBox11" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, -20.4 )
+use_collision = true
+width = 7.2
+height = 21.6
+depth = 9.8
+
+[node name="CSGBox17" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, -6.8 )
+use_collision = true
+width = 7.2
+height = 16.4
+depth = 9.8
+
+[node name="CSGBox18" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, 9.2 )
+use_collision = true
+width = 7.2
+height = 16.4
+depth = 9.8
+
+[node name="CSGBox19" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 1.2, 9.2 )
+use_collision = true
+width = 7.2
+height = 28.0
+depth = 9.8
+
+[node name="CSGBox12" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, -38.7 )
+use_collision = true
+width = 7.2
+height = 13.8
+depth = 9.8
+
+[node name="CSGBox13" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.7, 1.2, -20.4 )
+use_collision = true
+width = 7.2
+depth = 9.8
+
+[node name="CSGBox14" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.7, 1.2, -38.7 )
+use_collision = true
+width = 7.2
+depth = 9.8
+
+[node name="CSGBox8" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9, 1.2, -37.1 )
+use_collision = true
+width = 7.2
+height = 17.8
+depth = 9.8
+
+[node name="CSGBox16" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9, 1.2, -8.90001 )
+use_collision = true
+width = 7.2
+height = 14.8
+depth = 9.8
+
+[node name="CSGBox9" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9, 1.2, 21.2 )
+use_collision = true
+width = 7.2
+height = 17.8
+depth = 9.8
+
+[node name="CSGBox15" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 1.2, -18.2 )
+use_collision = true
+width = 3.6
+height = 8.0
+depth = 4.0
+
+[node name="CSGCylinder" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, -9.9 )
+visible = false
+
+[node name="CSGCylinder6" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, 5.1 )
+visible = false
+
+[node name="CSGCylinder2" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, -23.4 )
+visible = false
+
+[node name="CSGCylinder3" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, -42.2 )
+visible = false
+
+[node name="CSGCylinder4" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.89999, 3, -35.3 )
+visible = false
+
+[node name="CSGCylinder5" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.89999, 3, -16.7 )
+visible = false
+
+[node name="CSGCylinder7" parent="." instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.89999, 3, 12.5 )
+visible = false

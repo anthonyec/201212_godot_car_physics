@@ -84,13 +84,16 @@ func _apply_counter_forces():
 	DebugDraw.set_text("skid", skid)
 	DebugDraw.set_text("handebrake_percent", handebrake_percent)
 	
+	if disable_controls:
+		return
+		
 	DebugDraw.draw_ray_3d(
 		self.global_transform.origin, #  + (-self.global_transform.basis.z.normalized() * 0.2)
 		self.global_transform.basis.x.normalized(),
 		sideways_velocity,
 		Color.blue
 	)
-	
+
 	DebugDraw.draw_line_3d(
 		self.global_transform.origin,
 		self.global_transform.origin + self.linear_velocity,
