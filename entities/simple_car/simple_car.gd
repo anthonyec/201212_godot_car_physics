@@ -33,7 +33,7 @@ func _apply_control_forces():
 	# TODO: Maybe there is a better way that does not rely on curves by turning angles?
 	var forwards_velocity = self.linear_velocity.dot(-self.global_transform.basis.z.normalized())
 	var speed_percent_abs = abs(forwards_velocity / max_acceleration)
-	var interpolated_percent = 	turn_curve.interpolate(speed_percent_abs)
+	var interpolated_percent = turn_curve.interpolate(speed_percent_abs)
 
 	var turn_torque = (wheel_turn * max_turn_torque) * interpolated_percent;
 	var acceleration_force = acceleration * max_acceleration;

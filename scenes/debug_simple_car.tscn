@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://entities/camera/orbit_cam.gd" type="Script" id=1]
+[ext_resource path="res://entities/position/position.gd" type="Script" id=2]
+[ext_resource path="res://entities/enviroment/grid.tres" type="Material" id=3]
+[ext_resource path="res://entities/dynamic_car/dynamic_car.tscn" type="PackedScene" id=5]
+
+[sub_resource type="ProceduralSky" id=3]
+sky_top_color = Color( 0.176471, 0.729412, 1, 1 )
+sky_horizon_color = Color( 0.839216, 0.92549, 1, 1 )
+ground_bottom_color = Color( 0.796078, 0.839216, 0.901961, 1 )
+ground_horizon_color = Color( 0.866667, 0.921569, 1, 1 )
+
+[sub_resource type="Environment" id=1]
+background_mode = 2
+background_sky = SubResource( 3 )
+ambient_light_color = Color( 0.00392157, 0.129412, 0.266667, 1 )
+ambient_light_energy = 2.0
+
+[node name="Spatial" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Axis" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0135001, -2.38419e-07, -0.00163889 )
+visible = false
+script = ExtResource( 2 )
+
+[node name="DebugCamera" type="Camera" parent="."]
+transform = Transform( -0.866025, -0.17101, 0.469847, 0, 0.939693, 0.34202, -0.5, 0.296198, -0.813798, 2.74081, 2.43944, -5.29944 )
+current = true
+size = 26.5
+script = ExtResource( 1 )
+
+[node name="SunLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3, 0 )
+light_color = Color( 0.956863, 0.956863, 0.945098, 1 )
+shadow_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+
+[node name="Floor" type="CSGBox" parent="."]
+use_collision = true
+width = 200.0
+height = 0.002
+depth = 200.0
+material = ExtResource( 3 )
+
+[node name="DynamicCar" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )

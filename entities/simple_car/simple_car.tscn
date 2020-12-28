@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/simple_car/simple_car.gd" type="Script" id=1]
 [ext_resource path="res://entities/simple_car/body_spring.gd" type="Script" id=2]
 [ext_resource path="res://entities/follow_cam/spring.tscn" type="PackedScene" id=3]
-[ext_resource path="res://entities/simple_car/simple_car.dae" type="PackedScene" id=4]
+[ext_resource path="res://entities/simple_car/honder_civic_si.dae" type="PackedScene" id=5]
+[ext_resource path="res://entities/dynamic_body/dynamic_body.tscn" type="PackedScene" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -27,25 +28,26 @@ visible = false
 rings = 12
 
 [node name="Body" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 script = ExtResource( 2 )
 
+[node name="DynamicBody" parent="Body" instance=ExtResource( 6 )]
+
+[node name="honder_civic_si" parent="Body/DynamicBody" instance=ExtResource( 5 )]
+
 [node name="Headlights" type="SpotLight" parent="Body"]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -5.96046e-08, -0.1, -1.9 )
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -5.96046e-08, 0, -1.9 )
 light_energy = 2.0
 shadow_enabled = true
 spot_range = 15.0
 
 [node name="Breaklights" type="SpotLight" parent="Body"]
-transform = Transform( 1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, -0.1, 2 )
+transform = Transform( 1, 0, 0, 0, -0.939693, 0.34202, 0, -0.34202, -0.939693, 0, 0, 2 )
 light_color = Color( 0.894118, 0.0313726, 0.0313726, 1 )
 spot_range = 3.0
 spot_angle = 65.114
 
-[node name="simple_car" parent="Body" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
-
 [node name="SpringPitch" parent="Body" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 stiffness = 1000.0
 damping = 5.0
 springLength = 0.0
@@ -54,6 +56,7 @@ min_clamp = -2.0
 max_clamp = 2.0
 
 [node name="SpringRoll" parent="Body" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 stiffness = 1000.0
 mass = 2.0
 damping = 5.0

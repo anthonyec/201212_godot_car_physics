@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/dynamic_body/dynamic_body.gd" type="Script" id=1]
+[ext_resource path="res://entities/dynamic_car/honder_civic_si.dae" type="PackedScene" id=2]
+
+[node name="DynamicBody" type="Position3D"]
+script = ExtResource( 1 )
+model_resource = ExtResource( 2 )

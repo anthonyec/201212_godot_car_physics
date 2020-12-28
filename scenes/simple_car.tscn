@@ -34,23 +34,17 @@ target = NodePath("../SimpleCar")
 height = 15.0
 
 [node name="DebugCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 15.1, 3.3 )
+transform = Transform( -0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 3.14081, 2.13944, -6.09944 )
+current = true
 size = 26.5
 script = ExtResource( 1 )
 target_path = NodePath("../SimpleCar")
+orbit = true
 
 [node name="SunLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3, 0 )
 light_color = Color( 0.956863, 0.956863, 0.945098, 1 )
-shadow_enabled = true
 shadow_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-
-[node name="Floor" type="CSGBox" parent="."]
-use_collision = true
-width = 200.0
-height = 0.002
-depth = 200.0
-material = ExtResource( 3 )
 
 [node name="SimpleCar" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
@@ -66,139 +60,148 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -16.2 )
 disable_controls = true
 turn_curve = SubResource( 2 )
 
-[node name="CSGBox3" type="CSGBox" parent="."]
+[node name="Env" type="Spatial" parent="."]
+
+[node name="CSGBox3" type="CSGBox" parent="Env"]
 transform = Transform( 0.0871558, 0, -0.996195, 0, 1, 0, 0.996195, 0, 0.0871558, 5.7, 1.2, -3.4 )
 use_collision = true
 
-[node name="CSGBox4" type="CSGBox" parent="."]
+[node name="CSGBox4" type="CSGBox" parent="Env"]
 transform = Transform( 0.998982, -0.0435779, 0.0116322, 0.0435779, 0.866025, -0.498097, 0.0116322, 0.498097, 0.867043, -3.6, -0.3, 7.6 )
 use_collision = true
 width = 4.8
 height = 3.4
 depth = 4.2
 
-[node name="CSGBox2" type="CSGBox" parent="."]
+[node name="CSGBox2" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9, 1.2, 5.7 )
 use_collision = true
 width = 20.2
 
-[node name="CSGBox5" type="CSGBox" parent="."]
+[node name="CSGBox5" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9, 1.2, -20.4 )
 use_collision = true
 width = 7.2
 depth = 9.8
 
-[node name="CSGBox6" type="CSGBox" parent="."]
+[node name="CSGBox6" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.2, -20.4 )
 use_collision = true
 width = 7.2
 depth = 9.8
 
-[node name="CSGBox7" type="CSGBox" parent="."]
+[node name="CSGBox7" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.2, -38.7 )
 use_collision = true
 width = 7.2
 depth = 9.8
 
-[node name="CSGBox11" type="CSGBox" parent="."]
+[node name="CSGBox11" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, -20.4 )
 use_collision = true
 width = 7.2
 height = 21.6
 depth = 9.8
 
-[node name="CSGBox17" type="CSGBox" parent="."]
+[node name="CSGBox17" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, -6.8 )
 use_collision = true
 width = 7.2
 height = 16.4
 depth = 9.8
 
-[node name="CSGBox18" type="CSGBox" parent="."]
+[node name="CSGBox18" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, 9.2 )
 use_collision = true
 width = 7.2
 height = 16.4
 depth = 9.8
 
-[node name="CSGBox19" type="CSGBox" parent="."]
+[node name="CSGBox19" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 1.2, 9.2 )
 use_collision = true
 width = 7.2
 height = 28.0
 depth = 9.8
 
-[node name="CSGBox12" type="CSGBox" parent="."]
+[node name="CSGBox12" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9, 1.2, -38.7 )
 use_collision = true
 width = 7.2
 height = 13.8
 depth = 9.8
 
-[node name="CSGBox13" type="CSGBox" parent="."]
+[node name="CSGBox13" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.7, 1.2, -20.4 )
 use_collision = true
 width = 7.2
 depth = 9.8
 
-[node name="CSGBox14" type="CSGBox" parent="."]
+[node name="CSGBox14" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.7, 1.2, -38.7 )
 use_collision = true
 width = 7.2
 depth = 9.8
 
-[node name="CSGBox8" type="CSGBox" parent="."]
+[node name="CSGBox8" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9, 1.2, -37.1 )
 use_collision = true
 width = 7.2
 height = 17.8
 depth = 9.8
 
-[node name="CSGBox16" type="CSGBox" parent="."]
+[node name="CSGBox16" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9, 1.2, -8.90001 )
 use_collision = true
 width = 7.2
 height = 14.8
 depth = 9.8
 
-[node name="CSGBox9" type="CSGBox" parent="."]
+[node name="CSGBox9" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9, 1.2, 21.2 )
 use_collision = true
 width = 7.2
 height = 17.8
 depth = 9.8
 
-[node name="CSGBox15" type="CSGBox" parent="."]
+[node name="CSGBox15" type="CSGBox" parent="Env"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 1.2, -18.2 )
 use_collision = true
 width = 3.6
 height = 8.0
 depth = 4.0
 
-[node name="CSGCylinder" parent="." instance=ExtResource( 6 )]
+[node name="CSGCylinder" parent="Env" instance=ExtResource( 6 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, -9.9 )
 visible = false
 
-[node name="CSGCylinder6" parent="." instance=ExtResource( 6 )]
+[node name="CSGCylinder6" parent="Env" instance=ExtResource( 6 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, 5.1 )
 visible = false
 
-[node name="CSGCylinder2" parent="." instance=ExtResource( 6 )]
+[node name="CSGCylinder2" parent="Env" instance=ExtResource( 6 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, -23.4 )
 visible = false
 
-[node name="CSGCylinder3" parent="." instance=ExtResource( 6 )]
+[node name="CSGCylinder3" parent="Env" instance=ExtResource( 6 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 17.1, 3, -42.2 )
 visible = false
 
-[node name="CSGCylinder4" parent="." instance=ExtResource( 6 )]
+[node name="CSGCylinder4" parent="Env" instance=ExtResource( 6 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.89999, 3, -35.3 )
 visible = false
 
-[node name="CSGCylinder5" parent="." instance=ExtResource( 6 )]
+[node name="CSGCylinder5" parent="Env" instance=ExtResource( 6 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.89999, 3, -16.7 )
 visible = false
 
-[node name="CSGCylinder7" parent="." instance=ExtResource( 6 )]
+[node name="CSGCylinder7" parent="Env" instance=ExtResource( 6 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 9.89999, 3, 12.5 )
 visible = false
+
+[node name="Floor" type="CSGBox" parent="Env"]
+use_collision = true
+width = 200.0
+height = 0.002
+depth = 200.0
+material = ExtResource( 3 )
