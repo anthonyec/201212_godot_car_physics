@@ -17,10 +17,10 @@ func _ready():
 	create_headlights()
 	create_breaklights()
 	
-#	open_door("DoorFrontLeft")
-#	open_door("DoorFrontRight")
+	open_door("DoorFrontLeft")
+	open_door("DoorFrontRight")
 
-#	open_hood()
+	open_hood()
 	
 	pass
 	
@@ -37,6 +37,14 @@ func reparent(child: Node, new_parent: Node):
 	var old_parent = child.get_parent()
 	old_parent.remove_child(child)
 	new_parent.add_child(child)
+
+# https://godotengine.org/qa/45609/how-do-you-rotate-spatial-node-around-axis-given-point-space
+func rotate_around(obj, point, axis, angle):
+	var rot = angle + obj.rotation.y 
+	var tStart = point
+	obj.global_translate (-tStart)
+	obj.transform = obj.transform.rotated(axis, -rot)
+	obj.global_translate (tStart)
 	
 func detatch_part(name: String) -> RigidBody: 
 	var part: MeshInstance = model.get_node(name)
@@ -72,17 +80,15 @@ func detatch_part(name: String) -> RigidBody:
 	
 func open_hood():
 	var hood: MeshInstance = model.get_node("Hood")
-	hood.rotation_degrees.x = 90
+	rotate_around(hood, model.get_node("$_HINGE_Hood").translation, Vector3.RIGHT, deg2rad(-80))
 
 func open_door(name: String):
 	var door: MeshInstance = model.get_node(name)
 	
-	print(name.find("Right"))
-	
 	if name.find("Right") != -1:
-		door.rotation_degrees.y = 90
+		rotate_around(door, model.get_node("$_HINGE_" + name).translation, Vector3.UP, deg2rad(-80))
 	else:
-		door.rotation_degrees.y = -90
+		rotate_around(door, model.get_node("$_HINGE_" + name).translation, Vector3.UP, deg2rad(80))
 
 func create_light_at_node_location(selector: String, new_name: String, settings: Dictionary):
 	var node_position = model.get_node(selector)

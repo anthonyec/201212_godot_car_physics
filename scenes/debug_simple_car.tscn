@@ -5,22 +5,22 @@
 [ext_resource path="res://entities/enviroment/grid.tres" type="Material" id=3]
 [ext_resource path="res://entities/dynamic_car/dynamic_car.tscn" type="PackedScene" id=5]
 
-[sub_resource type="ProceduralSky" id=3]
+[sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.176471, 0.729412, 1, 1 )
 sky_horizon_color = Color( 0.839216, 0.92549, 1, 1 )
 ground_bottom_color = Color( 0.796078, 0.839216, 0.901961, 1 )
 ground_horizon_color = Color( 0.866667, 0.921569, 1, 1 )
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=2]
 background_mode = 2
-background_sky = SubResource( 3 )
+background_sky = SubResource( 1 )
 ambient_light_color = Color( 0.00392157, 0.129412, 0.266667, 1 )
 ambient_light_energy = 2.0
 
 [node name="Spatial" type="Spatial"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+environment = SubResource( 2 )
 
 [node name="Axis" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0135001, -2.38419e-07, -0.00163889 )
@@ -28,7 +28,7 @@ visible = false
 script = ExtResource( 2 )
 
 [node name="DebugCamera" type="Camera" parent="."]
-transform = Transform( -0.866025, -0.17101, 0.469847, 0, 0.939693, 0.34202, -0.5, 0.296198, -0.813798, 2.74081, 2.43944, -5.29944 )
+transform = Transform( -0.866025, -0.17101, 0.469847, 0, 0.939693, 0.34202, -0.5, 0.296198, -0.813798, 2.08302, 1.96061, -4.16012 )
 current = true
 size = 26.5
 script = ExtResource( 1 )
