@@ -32,3 +32,22 @@ func _physics_process(delta):
 	)
 	
 	pass
+
+
+func _on_DynamicBody_door_opened(name: String):
+	if name == "DoorFrontRight":
+		spring_roll.add_velocity(-20)
+		
+	if name == "DoorFrontLeft":
+		spring_roll.add_velocity(20)
+
+
+func _on_DynamicBody_hood_opened():
+	spring_pitch.add_velocity(10)
+
+func _on_DynamicBody_door_closed(name: String):
+	if name == "DoorFrontRight":
+		spring_roll.add_velocity(20)
+		
+	if name == "DoorFrontLeft":
+		spring_roll.add_velocity(-20)

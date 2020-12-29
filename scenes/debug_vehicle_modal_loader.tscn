@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/camera/orbit_cam.gd" type="Script" id=1]
 [ext_resource path="res://entities/position/position.gd" type="Script" id=2]
 [ext_resource path="res://entities/enviroment/grid.tres" type="Material" id=3]
-[ext_resource path="res://entities/dynamic_car/dynamic_car.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/vehicle_model_loader/vehicle_model_loader.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/dynamic_car/honder_civic_si.dae" type="PackedScene" id=5]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.176471, 0.729412, 1, 1 )
@@ -32,7 +33,7 @@ transform = Transform( -0.866025, -0.17101, 0.469847, 0, 0.939693, 0.34202, -0.5
 current = true
 size = 26.5
 script = ExtResource( 1 )
-target_path = NodePath("../DynamicCar")
+target_path = NodePath("../VehicleModelLoader")
 orbit = true
 
 [node name="SunLight" type="DirectionalLight" parent="."]
@@ -47,6 +48,6 @@ height = 0.002
 depth = 200.0
 material = ExtResource( 3 )
 
-[node name="DynamicCar" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
-disable_controls = true
+[node name="VehicleModelLoader" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732, 0 )
+model_resource = ExtResource( 5 )

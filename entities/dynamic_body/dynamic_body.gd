@@ -2,6 +2,11 @@ extends Node
 
 export var model_resource: Resource
 
+signal door_opened
+signal door_closed
+signal hood_opened
+signal hood_closed
+
 var model
 
 var left_side_selector = "_LEFT"
@@ -12,25 +17,28 @@ var brakelight_selector = "$_BRAKELIGHT"
 func _ready():
 	model = load(model_resource.resource_path).instance()
 	
+	
+	print(model)
+	
 	add_child(model)
 	
 	create_headlights()
 	create_breaklights()
 	
-	open_door("DoorFrontLeft")
-	open_door("DoorFrontRight")
-
-	open_hood()
-	
 	pass
 	
 func _process(_delta):
+	if (Input.is_action_just_pressed("ui_cancel")):
+		close_door("DoorFrontRight")
+		
 	if (Input.is_action_just_pressed("ui_accept")):
-		detatch_part("Hood")
-		detatch_part("DoorFrontLeft")
-		detatch_part("DoorFrontRight")
-		detatch_part("BumperBack")
-		detatch_part("BumperFront")
+		open_door("DoorFrontRight")
+#		open_hood()
+#		detatch_part("Hood")
+#		detatch_part("DoorFrontLeft")
+#		detatch_part("DoorFrontRight")
+#		detatch_part("BumperBack")
+#		detatch_part("BumperFront")
 		pass
 	
 func reparent(child: Node, new_parent: Node):
@@ -81,7 +89,19 @@ func detatch_part(name: String) -> RigidBody:
 func open_hood():
 	var hood: MeshInstance = model.get_node("Hood")
 	rotate_around(hood, model.get_node("$_HINGE_Hood").translation, Vector3.RIGHT, deg2rad(-80))
+	
+	emit_signal("hood_opened")
 
+func close_door(name: String):
+	var door: MeshInstance = model.get_node(name)
+	
+	if name.find("Right") != -1:
+		rotate_around(door, model.get_node("$_HINGE_" + name).translation, Vector3.UP, deg2rad(0))
+	else:
+		rotate_around(door, model.get_node("$_HINGE_" + name).translation, Vector3.UP, deg2rad(0))
+		
+	emit_signal("door_closed", name)
+	
 func open_door(name: String):
 	var door: MeshInstance = model.get_node(name)
 	
@@ -89,6 +109,8 @@ func open_door(name: String):
 		rotate_around(door, model.get_node("$_HINGE_" + name).translation, Vector3.UP, deg2rad(-80))
 	else:
 		rotate_around(door, model.get_node("$_HINGE_" + name).translation, Vector3.UP, deg2rad(80))
+		
+	emit_signal("door_opened", name)
 
 func create_light_at_node_location(selector: String, new_name: String, settings: Dictionary):
 	var node_position = model.get_node(selector)

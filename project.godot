@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="201212_car_physics"
-run/main_scene="res://scenes/debug_simple_car.tscn"
+run/main_scene="res://scenes/debug_vehicle_modal_loader.tscn"
 config/icon="res://icon.png"
 
 [autoload]

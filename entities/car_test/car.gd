@@ -21,9 +21,6 @@ var suspensionForce: Vector3
 func _ready():	
 	minLength = restLength - springTravel
 	maxLength = restLength + springTravel
-	
-	print("minLength", minLength)
-	print("maxLength", maxLength)
 
 func _physics_process(delta):
 	var wheelRayCastPosition = wheelRayCast.global_transform.origin;

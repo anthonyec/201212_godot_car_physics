@@ -7,6 +7,7 @@ export var springLength: float = 50
 export var clamp_spring: bool = false
 export var min_clamp: float = -10
 export var max_clamp: float = 10
+export var clamp_bounce: float = 0
 
 #/* Object position and velocity. */
 var value = 0
@@ -33,11 +34,11 @@ func _process(delta):
 	
 	if clamp_spring and value < min_clamp:
 		value = min_clamp
-		v = 0
+		v *= -clamp_bounce
 		
 	if clamp_spring and value > max_clamp:
 		value = max_clamp
-		v = 0
+		v *= -clamp_bounce
 	
 func add_velocity(velocity: float):
 	v += velocity

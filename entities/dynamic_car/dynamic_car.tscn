@@ -1,18 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/simple_car/simple_car.gd" type="Script" id=1]
 [ext_resource path="res://entities/simple_car/body_spring.gd" type="Script" id=2]
 [ext_resource path="res://entities/follow_cam/spring.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/vehicle_model_loader/vehicle_model_loader.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/dynamic_car/honder_civic_si.dae" type="PackedScene" id=5]
 [ext_resource path="res://entities/dynamic_body/dynamic_body.tscn" type="PackedScene" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 bounce = 0.5
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 3.98684, 0, 0, Vector2( 0.613861, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape" id=3]
 radius = 0.8
 height = 2.4
 
@@ -21,15 +23,16 @@ physics_material_override = SubResource( 1 )
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 1 )
-turn_curve = SubResource( 3 )
+turn_curve = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Body" type="Position3D" parent="."]
 script = ExtResource( 2 )
 
-[node name="DynamicBody" parent="Body" instance=ExtResource( 6 )]
+[node name="VehicleModelLoader" parent="Body" instance=ExtResource( 4 )]
+model_resource = ExtResource( 5 )
 
 [node name="SpringPitch" parent="Body" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
@@ -37,13 +40,12 @@ stiffness = 1000.0
 damping = 5.0
 springLength = 0.0
 clamp_spring = true
-min_clamp = -2.0
-max_clamp = 2.0
+min_clamp = -3.0
+max_clamp = 3.0
 
 [node name="SpringRoll" parent="Body" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
-stiffness = 1000.0
-mass = 2.0
+stiffness = 100.0
 damping = 5.0
 springLength = 0.0
 clamp_spring = true
@@ -67,3 +69,9 @@ height = 0.2
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.7, -0.4, -1.2 )
 radius = 0.3
 height = 0.2
+
+[node name="DynamicBody" parent="." instance=ExtResource( 6 )]
+visible = false
+[connection signal="door_closed" from="DynamicBody" to="Body" method="_on_DynamicBody_door_closed"]
+[connection signal="door_opened" from="DynamicBody" to="Body" method="_on_DynamicBody_door_opened"]
+[connection signal="hood_opened" from="DynamicBody" to="Body" method="_on_DynamicBody_hood_opened"]

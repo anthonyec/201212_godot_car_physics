@@ -54,7 +54,7 @@ func _ready():
 		target_distance = target_position.distance_to(self.global_transform.origin)
 
 func _process(delta):
-	if (!is_aiming):
+	if (!is_aiming and !orbit):
 		return
 		
 	var horizontal_axis = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
