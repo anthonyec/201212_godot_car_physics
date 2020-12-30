@@ -24,6 +24,7 @@ func unload_model_resource():
 		remove_child(model)
 		emit_signal("model_unloaded")
 
+# TODO: Find a way to reload resource when model is reimported
 func set_model_resource(value: PackedScene) -> PackedScene:
 	if !value:
 		unload_model_resource()

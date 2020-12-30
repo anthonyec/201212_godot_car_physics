@@ -17,9 +17,6 @@ var brakelight_selector = "$_BRAKELIGHT"
 func _ready():
 	model = load(model_resource.resource_path).instance()
 	
-	
-	print(model)
-	
 	add_child(model)
 	
 	create_headlights()

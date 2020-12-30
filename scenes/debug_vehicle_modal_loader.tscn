@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/camera/orbit_cam.gd" type="Script" id=1]
-[ext_resource path="res://entities/position/position.gd" type="Script" id=2]
+[ext_resource path="res://scenes/debug_vehicle_modal_loader.gd" type="Script" id=2]
 [ext_resource path="res://entities/enviroment/grid.tres" type="Material" id=3]
 [ext_resource path="res://entities/vehicle_model_loader/vehicle_model_loader.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/dynamic_car/honder_civic_si.dae" type="PackedScene" id=5]
@@ -15,31 +15,32 @@ ground_horizon_color = Color( 0.866667, 0.921569, 1, 1 )
 [sub_resource type="Environment" id=2]
 background_mode = 2
 background_sky = SubResource( 1 )
+background_color = Color( 0.372549, 0.372549, 0.372549, 1 )
 ambient_light_color = Color( 0.00392157, 0.129412, 0.266667, 1 )
 ambient_light_energy = 2.0
 
 [node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
-[node name="Axis" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0135001, -2.38419e-07, -0.00163889 )
-visible = false
-script = ExtResource( 2 )
+[node name="SunLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3, 0 )
+light_color = Color( 0.956863, 0.956863, 0.945098, 1 )
+shadow_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
 [node name="DebugCamera" type="Camera" parent="."]
-transform = Transform( -0.866025, -0.17101, 0.469847, 0, 0.939693, 0.34202, -0.5, 0.296198, -0.813798, 1.57042, 1.85351, -3.27227 )
+transform = Transform( -0.866025, -0.17101, 0.469847, 0, 0.939693, 0.34202, -0.5, 0.296198, -0.813798, 2.97124, 3.41396, -5.26416 )
 current = true
 size = 26.5
 script = ExtResource( 1 )
 target_path = NodePath("../VehicleModelLoader")
 orbit = true
 
-[node name="SunLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3, 0 )
-light_color = Color( 0.956863, 0.956863, 0.945098, 1 )
-shadow_color = Color( 0.321569, 0.321569, 0.321569, 1 )
+[node name="VehicleModelLoader" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28, 0 )
+model_resource = ExtResource( 5 )
 
 [node name="Floor" type="CSGBox" parent="."]
 use_collision = true
@@ -47,7 +48,3 @@ width = 200.0
 height = 0.002
 depth = 200.0
 material = ExtResource( 3 )
-
-[node name="VehicleModelLoader" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732, 0 )
-model_resource = ExtResource( 5 )
