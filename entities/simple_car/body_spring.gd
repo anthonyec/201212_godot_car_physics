@@ -1,5 +1,7 @@
 extends Spatial
 
+export var show_debug: bool = false
+
 onready var rb: RigidBody = get_parent()
 onready var spring_pitch = $SpringPitch
 onready var spring_roll = $SpringRoll
@@ -25,11 +27,12 @@ func _physics_process(delta):
 	
 	_apply_spring_motion_to_self()
 	
-	DebugDraw.draw_line_3d(
-		self.global_transform.origin,
-		self.global_transform.origin + (-acceleration / 2),
-		Color.purple
-	)
+	if show_debug:
+		DebugDraw.draw_line_3d(
+			self.global_transform.origin,
+			self.global_transform.origin + (-acceleration / 2),
+			Color.purple
+		)
 	
 	pass
 

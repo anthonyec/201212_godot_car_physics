@@ -1,6 +1,7 @@
 extends RigidBody
 
 export var disable_controls: bool
+export var show_debug: bool = false
 export var turn_curve: Curve
 
 var max_acceleration: float = 20
@@ -28,7 +29,8 @@ func _process_controls():
 	handebrake = handebrake_axis
 	
 func _apply_control_forces():
-	_process_controls()
+	if !disable_controls:
+		_process_controls()
 	
 	# TODO: Maybe there is a better way that does not rely on curves by turning angles?
 	var forwards_velocity = self.linear_velocity.dot(-self.global_transform.basis.z.normalized())
@@ -79,29 +81,25 @@ func _apply_counter_forces():
 	
 	var skid = clamp(abs((sideways_velocity / (max_acceleration - forwards_velocity))), 0, 1)
 	
-	DebugDraw.set_text("forwards_velocity", forwards_velocity)
-	DebugDraw.set_text("sideways_velocity", sideways_velocity)
-	DebugDraw.set_text("skid", skid)
-	DebugDraw.set_text("handebrake_percent", handebrake_percent)
-	
-	if disable_controls:
-		return
-		
-	DebugDraw.draw_ray_3d(
-		self.global_transform.origin, #  + (-self.global_transform.basis.z.normalized() * 0.2)
-		self.global_transform.basis.x.normalized(),
-		sideways_velocity,
-		Color.blue
-	)
+	if show_debug:
+		DebugDraw.set_text("forwards_velocity", forwards_velocity)
+		DebugDraw.set_text("sideways_velocity", sideways_velocity)
+		DebugDraw.set_text("skid", skid)
+		DebugDraw.set_text("handebrake_percent", handebrake_percent)
+			
+		DebugDraw.draw_ray_3d(
+			self.global_transform.origin, #  + (-self.global_transform.basis.z.normalized() * 0.2)
+			self.global_transform.basis.x.normalized(),
+			sideways_velocity,
+			Color.blue
+		)
 
-	DebugDraw.draw_line_3d(
-		self.global_transform.origin,
-		self.global_transform.origin + self.linear_velocity,
-		Color.red
-	)
+		DebugDraw.draw_line_3d(
+			self.global_transform.origin,
+			self.global_transform.origin + self.linear_velocity,
+			Color.red
+		)
 
 func _physics_process(delta):
-	if !disable_controls:
-		_apply_control_forces()
-
+	_apply_control_forces()
 	_apply_counter_forces()

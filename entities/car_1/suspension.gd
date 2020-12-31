@@ -1,7 +1,8 @@
 extends RayCast
 
-onready var rb: RigidBody = self.get_parent()
+export var show_debug: bool = false
 
+onready var rb: RigidBody = self.get_parent()
 onready var wheel = $Wheel
 
 var restLength: float = 2
@@ -60,12 +61,13 @@ func _physics_process(delta):
 		
 		var force = suspensionForce
 		
-		DebugDraw.draw_ray_3d(
-			rb.global_transform.origin + forceLocation, 
-			suspensionForce.normalized(),
-			2,
-			Color.blue
-		)
+		if show_debug:
+			DebugDraw.draw_ray_3d(
+				rb.global_transform.origin + forceLocation, 
+				suspensionForce.normalized(),
+				2,
+				Color.blue
+			)
 		
 		rb.add_force(force, forceLocation)
 
