@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.82.7 commit date:2020-03-12, commit time:05:06, hash:375c7dc4caf4</authoring_tool>
     </contributor>
-    <created>2020-12-30T22:09:40</created>
-    <modified>2020-12-30T22:09:40</modified>
+    <created>2020-12-31T00:29:43</created>
+    <modified>2020-12-31T00:29:43</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -383,13 +383,13 @@
         <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
         <instance_geometry url="#Cube_003-mesh" name="Chassis"/>
       </node>
-      <node id="__HINGE_Hood" name="$_HINGE_Hood" type="NODE">
+      <node id="__PIVOT_Hood" name="$_PIVOT_Hood" type="NODE">
         <matrix sid="transform">-4.37114e-8 4.37114e-8 1 0 1 1.91069e-15 4.37114e-8 0.8852494 0 1 -4.37114e-8 0.2560329 0 0 0 1</matrix>
       </node>
-      <node id="__HINGE_DoorFrontLeft" name="$_HINGE_DoorFrontLeft" type="NODE">
+      <node id="__PIVOT_DoorFrontLeft" name="$_PIVOT_DoorFrontLeft" type="NODE">
         <matrix sid="transform">-4.37114e-8 -1 0 -0.7652041 1 -4.37114e-8 0 0.7709044 0 0 1 -0.00503654 0 0 0 1</matrix>
       </node>
-      <node id="__HINGE_DoorFrontRight" name="$_HINGE_DoorFrontRight" type="NODE">
+      <node id="__PIVOT_DoorFrontRight" name="$_PIVOT_DoorFrontRight" type="NODE">
         <matrix sid="transform">1 0 0 0.7647287 0 1 0 0.7709044 0 0 1 -0.00503654 0 0 0 1</matrix>
       </node>
       <node id="__HEADLIGHT_RIGHT" name="$_HEADLIGHT_RIGHT" type="NODE">

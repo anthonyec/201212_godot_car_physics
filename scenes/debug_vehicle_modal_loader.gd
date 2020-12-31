@@ -40,14 +40,14 @@ func _process(_delta):
 	if (Input.is_action_just_pressed("ui_cancel")):
 		if not opened:
 			opened = true
-			get_node("VehicleModelLoader/PartController").rotate_part("DoorFrontLeft", 30)
-			get_node("VehicleModelLoader/PartController").rotate_part("DoorFrontRight", 30)
-			get_node("VehicleModelLoader/PartController").rotate_part("Hood", 30)
+			get_node("VehicleModelLoader/PartController").open_door("DoorFrontLeft")
+			get_node("VehicleModelLoader/PartController").open_door("DoorFrontRight")
+			get_node("VehicleModelLoader/PartController").open_hood()
 		else:
 			opened = false
-			get_node("VehicleModelLoader/PartController").rotate_part("DoorFrontLeft", 0)
-			get_node("VehicleModelLoader/PartController").rotate_part("DoorFrontRight", 0)
-			get_node("VehicleModelLoader/PartController").rotate_part("Hood", 0)
+			get_node("VehicleModelLoader/PartController").close_door("DoorFrontLeft")
+			get_node("VehicleModelLoader/PartController").close_door("DoorFrontRight")
+			get_node("VehicleModelLoader/PartController").close_hood()
 			
 		
 	if (Input.is_action_just_pressed("ui_accept")):

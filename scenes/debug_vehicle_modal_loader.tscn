@@ -38,7 +38,7 @@ script = ExtResource( 1 )
 target_path = NodePath("../VehicleModelLoader")
 orbit = true
 
-[node name="VehicleModelLoader" parent="." instance=ExtResource( 4 )]
+[node name="VehicleModelLoader3" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28, 0 )
 model_resource = ExtResource( 5 )
 
@@ -48,3 +48,7 @@ width = 200.0
 height = 0.002
 depth = 200.0
 material = ExtResource( 3 )
+
+[node name="VehicleModelLoader" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.2, 0 )
+model_resource = ExtResource( 5 )

@@ -13,7 +13,6 @@ func _ready():
 	if model and selector and entity:
 		var entity_node = get_node(entity)
 		
-		
 		for child in model.get_children():
 			if selector in child.name:
 				var duplicated_entity = entity_node.duplicate()
@@ -33,7 +32,3 @@ func _on_model_unloaded():
 	
 	for child in get_children():
 		remove_child(child)
-
-
-func _on_VehicleModelLoader_model_loaded():
-	pass # Replace with function body.

@@ -4,30 +4,31 @@ extends Node
 
 func reparent(child: Node, new_parent: Node):
 	var old_parent = child.get_parent()
+	
+	# TODO: Maybe add option to only hide/disable instead of removing
 	old_parent.remove_child(child)
 	new_parent.add_child(child)
 
 func detatch_part(name: String) -> RigidBody:
+	
 	# TODO: Better way to reference the model? Is there a Godot standard to make
 	# this script reusable?
+	if !get_parent().has_node("Model") or !get_parent().get_node("Model").get_node(name):
+		return null
+		
 	var model = get_parent().get_node("Model")
-	
-	if !model:
-		return null
-	
 	var part: MeshInstance = model.get_node(name)
-
-	if !part:
-		return null
-
 	var root = get_node("/root/Spatial") # TODO: A way to not hard-code this path?
 	var original_transform = part.global_transform
 
 	# Create RigidBody and CollisionShape and and set them up	
 	var new_rigid_body = RigidBody.new()
 	var new_collision_shape = CollisionShape.new()
+	
+	# Add RigidBody to VehicleModelLoader
 	add_child(new_rigid_body)
-	new_rigid_body.add_child(part)
+	
+	# Add part MeshInstance and CollisionShape to the RigidBody
 	new_rigid_body.add_child(new_collision_shape)
 
 	# Move the part MeshInstance into the RigidBody node
