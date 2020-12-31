@@ -43,11 +43,13 @@ func _process(_delta):
 			get_node("VehicleModelLoader/PartController").open_door("DoorFrontLeft")
 			get_node("VehicleModelLoader/PartController").open_door("DoorFrontRight")
 			get_node("VehicleModelLoader/PartController").open_hood()
+			get_node("VehicleModelLoader/PartController").rotate_part("Boot", 80)
 		else:
 			opened = false
 			get_node("VehicleModelLoader/PartController").close_door("DoorFrontLeft")
 			get_node("VehicleModelLoader/PartController").close_door("DoorFrontRight")
 			get_node("VehicleModelLoader/PartController").close_hood()
+			get_node("VehicleModelLoader/PartController").rotate_part("Boot", 0)
 			
 		
 	if (Input.is_action_just_pressed("ui_accept")):
@@ -58,5 +60,8 @@ func _process(_delta):
 		get_node("VehicleModelLoader/PartDetacher").detatch_part("DoorFrontLeft")
 		get_node("VehicleModelLoader/PartDetacher").detatch_part("HeadlightRight")
 		get_node("VehicleModelLoader/PartDetacher").detatch_part("HeadlightLeft")
-#		get_node("VehicleModelLoader/PartDetacher").detatch_part("Chassis")
+		get_node("VehicleModelLoader/PartDetacher").detatch_part("SpotBar")
+		get_node("VehicleModelLoader/PartDetacher").detatch_part("HeadlightSpot")
+		get_node("VehicleModelLoader/PartDetacher").detatch_part("Chassis")
+		get_node("VehicleModelLoader/PartDetacher").detatch_part("Boot")
 	pass

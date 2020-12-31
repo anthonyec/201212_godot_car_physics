@@ -1,5 +1,6 @@
 tool
 extends Spatial
+class_name VehicleModelLoader
 
 export var model_resource: PackedScene = null setget set_model_resource
 
