@@ -18,20 +18,7 @@ func _ready():
 
 	pass
 	
-func _process_controls():
-	# TODO: Move these into seperate node that can be controlled with signals or something
-	var horizontal_axis = Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right")
-	var vertical_axis = Input.get_action_strength("accelerate") - Input.get_action_strength("brake")
-	var handebrake_axis = Input.get_action_strength("handbrake")
-	
-	wheel_turn = horizontal_axis
-	acceleration = vertical_axis
-	handebrake = handebrake_axis
-	
-func _apply_control_forces():
-	if !disable_controls:
-		_process_controls()
-	
+func _apply_control_forces():	
 	# TODO: Maybe there is a better way that does not rely on curves by turning angles?
 	var forwards_velocity = self.linear_velocity.dot(-self.global_transform.basis.z.normalized())
 	var speed_percent_abs = abs(forwards_velocity / max_acceleration)

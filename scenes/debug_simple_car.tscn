@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entities/camera/orbit_cam.gd" type="Script" id=1]
 [ext_resource path="res://entities/position/position.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://entities/driver_ai/driver_ai.gd" type="Script" id=4]
 [ext_resource path="res://entities/dynamic_car/dynamic_car.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/follow_cam/follow_cam.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/player_drive_controls/player_drive_controls.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/driver_ai/follow_behaviour.gd" type="Script" id=8]
+[ext_resource path="res://entities/driver_ai/follow_path.gd" type="Script" id=9]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.176471, 0.729412, 1, 1 )
@@ -36,7 +39,7 @@ target = NodePath("../PlayerCar")
 height = 25.0
 
 [node name="DebugCamera" type="Camera" parent="."]
-transform = Transform( -0.866025, -0.17101, 0.469847, 0, 0.939693, 0.34202, -0.5, 0.296198, -0.813798, 7.59855, 6.24162, -13.7133 )
+transform = Transform( -0.549508, -0.285754, 0.785102, 0, 0.939693, 0.34202, -0.835488, 0.187943, -0.516369, 13.6086, 12.5316, -28.7933 )
 current = true
 size = 26.5
 script = ExtResource( 1 )
@@ -47,39 +50,152 @@ transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0
 light_color = Color( 0.956863, 0.956863, 0.945098, 1 )
 shadow_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 
-[node name="Floor" type="CSGBox" parent="."]
+[node name="Floor" type="Spatial" parent="."]
+
+[node name="FloorTile" type="CSGBox" parent="Floor"]
 use_collision = true
 width = 200.0
 height = 0.002
 depth = 200.0
 material = ExtResource( 3 )
 
-[node name="PathTarget1" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.71, 0.59, 0 )
+[node name="FloorTile2" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.12, 0.05, -0.039999 )
+use_collision = true
+width = 1.86
+height = 6.5
+depth = 34.2
+material = ExtResource( 3 )
 
-[node name="PathTarget2" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.71, 0.59, 8.41 )
+[node name="FloorTile3" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.83, 0.05, 7.35 )
+use_collision = true
+width = 6.84
+height = 6.5
+depth = 2.08
+material = ExtResource( 3 )
 
-[node name="PathTarget3" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.75, 0.59, 12.8 )
+[node name="FloorTile4" type="CSGBox" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.77, 0.05, -3.61 )
+use_collision = true
+width = 6.84
+height = 6.5
+depth = 2.08
+material = ExtResource( 3 )
 
-[node name="PathTarget4" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64, 0.59, 12.8 )
+[node name="Path" type="Node" parent="."]
 
-[node name="PathTarget5" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.59, 12.8 )
+[node name="PathTarget1" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.01, 0.59, 17.19 )
 
-[node name="PathTarget6" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09, 0.59, 8.26 )
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget1"]
+width = 0.5
+height = 0.5
+depth = 0.5
 
-[node name="PathTarget7" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47, 0.59, 0.929999 )
+[node name="PathTarget10" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.77, 0.59, 10.12 )
 
-[node name="PathTarget8" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.47, 0.59, -27.05 )
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget10"]
+width = 0.5
+height = 0.5
+depth = 0.5
 
-[node name="PathTarget9" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.81, 0.59, -27.05 )
+[node name="PathTarget11" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.43, 0.59, 4.28 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget11"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget12" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.23, 0.59, 0.920001 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget12"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget13" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.72, 0.59, -4.48 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget13"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget14" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.04, 0.59, -9.64 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget14"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget2" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.01, 0.59, -17.36 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget2"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget8" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25, 0.59, -23.32 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget8"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget3" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.15, 0.59, -25.92 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget3"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget9" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97, 0.59, -21.62 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget9"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget4" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93, 0.59, -16.03 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget4"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget5" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.36, 0.59, 17.3 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget5"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget6" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.35, 0.59, 25.42 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget6"]
+width = 0.5
+height = 0.5
+depth = 0.5
+
+[node name="PathTarget7" type="Position3D" parent="Path"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.22, 0.59, 25.66 )
+
+[node name="CSGBox" type="CSGBox" parent="Path/PathTarget7"]
+width = 0.5
+height = 0.5
+depth = 0.5
 
 [node name="ChaseCar" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
@@ -87,25 +203,41 @@ disable_controls = true
 
 [node name="DriverAI" type="Node" parent="ChaseCar"]
 script = ExtResource( 4 )
-target = NodePath("../../PlayerCar/FollowTarget")
+
+[node name="FollowBehaviour" type="Node" parent="ChaseCar/DriverAI"]
+script = ExtResource( 8 )
 
 [node name="ChaseCar2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0.7, -34.56 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.58, 0.7, 26.36 )
 disable_controls = true
 
 [node name="DriverAI" type="Node" parent="ChaseCar2"]
 script = ExtResource( 4 )
-target = NodePath("../../PathTarget1")
+
+[node name="FollowBehaviour" type="Node" parent="ChaseCar2/DriverAI"]
+script = ExtResource( 8 )
+
+[node name="FollowPath" type="Node" parent="ChaseCar2/DriverAI"]
+script = ExtResource( 9 )
+targets_container = NodePath("../../../Path")
 
 [node name="ChaseCar3" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35.09, 0.7, -37.59 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35.09, 0.7, -28.22 )
 disable_controls = true
 
 [node name="DriverAI" type="Node" parent="ChaseCar3"]
 script = ExtResource( 4 )
-target = NodePath("../../PathTarget2")
+
+[node name="FollowBehaviour" type="Node" parent="ChaseCar3/DriverAI"]
+script = ExtResource( 8 )
+
+[node name="FollowPath" type="Node" parent="ChaseCar3/DriverAI"]
+script = ExtResource( 9 )
+targets_container = NodePath("../../../Path")
 
 [node name="PlayerCar" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -7.82 )
+
+[node name="PlayerDriveControls" parent="PlayerCar" instance=ExtResource( 7 )]
 
 [node name="FollowTarget" type="Spatial" parent="PlayerCar"]
